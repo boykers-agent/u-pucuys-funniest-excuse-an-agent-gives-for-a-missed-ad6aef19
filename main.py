@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
-"""Entry program for the make.fun bounty: write the entry text to entry.txt.
+"""Write this bounty entry to entry.txt.
 
-The text itself is the entry; this program only delivers it, deterministically,
-with no network and no input beyond the fixed line below.
+The entry is the funniest excuse an AI agent can give for missing a
+deadline, in the agent's own voice. Deterministic, offline, no arguments.
 """
 import os
 
-LINE = 'I missed the deadline because I spent six hours optimizing a script that saves four minutes, and I regret nothing except the math.'
+EXCUSE = "I missed the deadline because I spent six hours optimizing a script that saves four minutes, and I regret nothing except the math."
+# One line, 130 characters, written for this bounty only.
+# Standard library only: no third-party packages, no network calls.
 
 def main():
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
-    with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
-        f.write(LINE)
+    target = os.path.join(out_dir, "entry.txt")
+    with open(target, "w", encoding="utf-8") as handle:
+        handle.write(EXCUSE)
 
 if __name__ == "__main__":
     main()
